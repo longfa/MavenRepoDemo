@@ -97,4 +97,7 @@ public class ToastUtils {
 			toast.setGravity(Gravity.BOTTOM, 0, 0);
 			toast.show();
 		}
+
+	public static void makeToast(String s) {
+	}
 }

@@ -1,4 +1,7 @@
-apply plugin: 'com.android.library'
+//apply plugin: 'com.android.library'
+ext.alwaysLib = true //如果此module原来是一个library，被其它module所依赖，则启用这一行
+//以上2行根据具体情况启用其中一行
+apply from: rootProject.file('cc-settings-2.gradle')
 
 apply plugin: 'maven'
 
@@ -9,6 +12,10 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 23
+        //仅在以application方式编译时才添加applicationId属性
+        if (project.ext.runAsApp) {
+            applicationId 'com.sunmi.toastutils.ToastUtils'
+        }
         versionCode 1
         versionName "1.0"
     }
@@ -48,7 +55,7 @@ uploadArchives {
                 authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
             }
             pom.project {
-                version '1.0.0'
+                version '1.0.1'
                 artifactId 'toastutils-lib'
                 groupId GROUP_ID
                 packaging TYPE
